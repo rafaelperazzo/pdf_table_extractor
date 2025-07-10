@@ -9,6 +9,8 @@ ghostscript = "*"
 pypdf = "*"
 pdfplumber = "*"
 pandas = "*"
+tabula-py = "*"
+jpype1 = "*"
 
 [dev-packages]
 

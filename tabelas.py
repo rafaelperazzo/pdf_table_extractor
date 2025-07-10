@@ -1,5 +1,6 @@
 import pdfplumber 
 import pandas as pd
+import tabula
 
 def remover_pontos(linhas):
     for linha in linhas:
@@ -110,3 +111,7 @@ with pdfplumber.open('planilha.pdf') as pdf:
         print(len(linha), linha)
     df = pd.DataFrame(linhas, columns=['UF', 'Cidade1', 'Cidade2', 'Estado1', 'Estado2','Ida','Volta','Total','pass.km'])
     df.to_csv('tabela.csv', index=False, encoding='utf-8')
+    
+    dfs = tabula.read_pdf("planilha.pdf", pages='all')
+    tabula.convert_into("planilha.pdf", "tabula.csv", output_format="csv", pages='all')
+    
