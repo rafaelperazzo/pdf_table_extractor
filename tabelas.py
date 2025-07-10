@@ -27,6 +27,7 @@ def posicao_segundo_estado(linha):
     return -1
 
 def ajustar_linhas(linhas):
+    linhas_ajustadas = []
     for i, linha in enumerate(linhas):
         if len(linha)>10: #Linha com nome de uma das cidades composto
             estado = posicao_primeiro_estado(linha)
@@ -34,11 +35,14 @@ def ajustar_linhas(linhas):
                 cidade = ''
                 for i in range(1, estado):
                     cidade = cidade + ' ' + linha[i]
-                for i in range(2,estado):
-                    linha.remove(linha[i])
                 linha[1] = cidade.strip()
-                
-    return linhas
+                linha = [linha[0], linha[1]] + linha[estado:]
+                linhas_ajustadas.append(linha)
+            estado2 = posicao_segundo_estado(linha)
+            print(estado2)
+        else:
+            linhas_ajustadas.append(linha)
+    return linhas_ajustadas
         
 with pdfplumber.open('planilha.pdf') as pdf:
     for i, page in enumerate(pdf.pages):
